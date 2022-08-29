@@ -1,0 +1,124 @@
+/*------------Question1-----------*/
+using System;
+
+namespace Assignment2Ques1
+{   
+    public class Median
+    {
+        public static void Main()
+        {
+           
+            //Initialize the array
+            int[] myNum = { 47,84,75,21,14,14,79};
+
+            //sort
+            int temp = 0;
+            int length = myNum.Length;
+            float median = 0;
+            for (int i = 0; i < length - 1; i++)
+            {
+                for (int j = 0; j < length - i - 1; j++)
+                {
+                    if (myNum[j] < myNum[j + 1])
+                    {
+                        temp = myNum[j];
+                        myNum[j] = myNum[j + 1];
+                        myNum[j + 1] = temp;
+                    }
+                }
+            }
+
+
+            //median 
+            if (length % 2 == 0)
+            {
+                median = ((myNum[(length / 2) - 1] + myNum[(length / 2)]) / 2.0F);
+            }
+            else
+            {
+                median = myNum[(length / 2)];
+            }
+
+            //mode
+           int count = 0;
+           int mode = 0;
+           int k = 0;
+           for(int i = 0; i < length; i++)
+           {
+             k = i + 1;
+             if(k < length) 
+             {
+                 if (myNum[i] == myNum[k])
+                 {
+                     int count1 = 0;
+                     for (int j = i + 1; j < length; j++)
+                     {
+                       if (myNum[i] == myNum[j])
+                       {
+                          count1++;
+                       }
+                     }
+                     if (count1 > count)
+                     {
+                     count = count1;
+                     mode = myNum[i];
+                     }
+                 }
+             }
+             
+           }
+
+            Console.WriteLine("Median is " + median);
+            Console.WriteLine("Highest Value is " + myNum[0]);
+            Console.WriteLine("Mode is " + mode);
+            Console.ReadKey();
+        }
+    }
+}
+
+
+
+/*------------Question2-----------*/
+using System;
+using System.Collections.Generic;
+
+namespace Assignment2Ques2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] myArr = { 47, 84, 75, 21, 14, 14, 79 };
+            int max = myArr.Length;
+            List<int> list1 = new List<int>();
+            for (int i =0; i<max; i++)
+            {                
+                if (IsPrime(myArr[i]))
+                {
+                   list1.Add(myArr[i]);
+                }
+            }
+
+            for (int i = 0; i < list1.Count; i++)
+            {
+                Console.WriteLine(list1[i]);
+            }
+        }
+
+        public static bool IsPrime(int number)
+        {
+            if (number <= 1) return false;
+            if (number == 2) return true;
+            if (number % 2 == 0) return false;
+
+            var sqrt = (int)Math.Floor(Math.Sqrt(number));
+
+            for (int i = 3; i <= sqrt; i += 2)
+                if (number % i == 0)
+                    return false;
+
+            return true;
+        }
+    }
+}
+
